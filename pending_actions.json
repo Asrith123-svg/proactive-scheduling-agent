@@ -1,0 +1,17 @@
+[
+  {
+    "conflict": "There is a meeting 'Test event WITH attendee' scheduled at 10:00 PM, outside normal working hours.",
+    "proposed_resolution": "Here are 1-2 proposed resolutions for the conflict:\n\n1. Reschedule the meeting to 7:00 AM - 9:00 AM (on any day except Monday, considering the morning preference and conflict with Monday mornings).\n2. Reschedule the meeting to 10:00 AM - 12:00 PM on a weekday (within the user's preferred working hours, accommodating the afternoon).",
+    "status": "awaiting_approval"
+  },
+  {
+    "conflict": "There is a meeting 'Test event WITH attendee' scheduled at 10:00 PM, outside normal working hours.",
+    "proposed_resolution": "1. Reschedule the meeting to 9:00 AM (on a non-Monday, if possible) to adhere to the user's Monday morning schedule preference.\n2. Cancel the meeting scheduled at 10:00 PM and reschedule it for a date and time outside of the user's non-work hours, such as 9:00 AM on a Tuesday.",
+    "status": "awaiting_approval"
+  },
+  {
+    "conflict": "'Test event WITH attendee' overlaps with 'Test event WITH attendee' by 30 minutes.",
+    "proposed_resolution": "Conflict resolution proposals:\n\n1. Move 'Test event WITH attendee' to 30 minutes after its current end time, allowing a buffer between the two overlapping events.\n2. Postpone 'Test event WITH attendee' to the next available time slot after 9am on Monday, ensuring the buffer requirement is met and the user's preference is respected.",
+    "status": "awaiting_approval"
+  }
+]
