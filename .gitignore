@@ -1,0 +1,8 @@
+venv/
+token.pickle
+credentials.json
+.env
+memory_store.pkl
+memory_index.faiss
+__pycache__/
+*.pyc
