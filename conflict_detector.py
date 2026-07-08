@@ -4,6 +4,8 @@ from dateutil import parser as dateparser
 import pytz
 from conflict_memory import enrich_conflict_with_memory
 from decision_maker import propose_resolution
+from risk_assessor import assess_risk, describe_risk
+from pending_actions import add_pending_action
 
 LOCAL_TZ = pytz.timezone('Asia/Kolkata')
 
@@ -45,6 +47,7 @@ def detect_conflicts(events, buffer_minutes=10, work_start_hour=9, work_end_hour
             'summary': event.get('summary', '(no title)'),
             'start': start,
             'end': end,
+            'raw_event': event,
         })
 
     for e in parsed_events:
@@ -54,6 +57,7 @@ def detect_conflicts(events, buffer_minutes=10, work_start_hour=9, work_end_hour
                 'event': e['summary'],
                 'start': e['start'],
                 'end': e['end'],
+                'raw_events': [e['raw_event']],
             })
 
     for i in range(len(parsed_events) - 1):
@@ -68,6 +72,7 @@ def detect_conflicts(events, buffer_minutes=10, work_start_hour=9, work_end_hour
                 'event_a': current['summary'],
                 'event_b': nxt['summary'],
                 'overlap_minutes': abs(gap),
+                'raw_events': [current['raw_event'], nxt['raw_event']],
             })
         elif gap < buffer_minutes:
             conflicts.append({
@@ -75,9 +80,16 @@ def detect_conflicts(events, buffer_minutes=10, work_start_hour=9, work_end_hour
                 'event_a': current['summary'],
                 'event_b': nxt['summary'],
                 'gap_minutes': gap,
+                'raw_events': [current['raw_event'], nxt['raw_event']],
             })
 
     return conflicts
+
+
+def get_conflict_risk(conflict):
+    """Check all events involved in this conflict; if any has attendees, it's high risk."""
+    risks = [assess_risk(e) for e in conflict.get('raw_events', [])]
+    return 'high' if 'high' in risks else 'low'
 
 
 if __name__ == '__main__':
@@ -98,4 +110,14 @@ if __name__ == '__main__':
             print("\nProposed resolution:")
             resolution = propose_resolution(enriched)
             print(resolution)
+
+            risk = get_conflict_risk(enriched)
+            print(f"\nRisk assessment: {describe_risk(risk)}")
+
+            if risk == 'low':
+                print("[AUTO-EXECUTE] No other attendees — this would be applied automatically.")
+                print("(Note: actual calendar modification not yet implemented — this logs the decision only.)")
+            else:
+                add_pending_action(enriched['description'], resolution)
+
             print("\n" + "-"*50 + "\n")
