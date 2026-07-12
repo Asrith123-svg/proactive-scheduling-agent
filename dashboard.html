@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Scheduling Agent Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+            background: #0f1117;
+            color: #e6e6e6;
+            margin: 0;
+            padding: 40px;
+        }
+        h1 {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .subtitle {
+            color: #888;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #2a2d3a;
+            color: #aaa;
+        }
+        .card {
+            background: #1a1d29;
+            border: 1px solid #2a2d3a;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 10px;
+        }
+        .card.pending {
+            border-left: 3px solid #e0a030;
+        }
+        .card.executed {
+            border-left: 3px solid #3ab27a;
+        }
+        .conflict {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .resolution {
+            font-size: 13px;
+            color: #aaa;
+            white-space: pre-line;
+        }
+        .status {
+            display: inline-block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .status.pending { background: #4a3a1a; color: #e0a030; }
+        .status.executed { background: #1a3a2a; color: #3ab27a; }
+        .empty {
+            color: #666;
+            font-size: 13px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scheduling Agent Dashboard</h1>
+    <div class="subtitle">Live view of pending approvals and auto-executed actions</div>
+
+    <div class="section">
+        <div class="section-title">
+            Awaiting Approval <span class="badge" id="pending-count">0</span>
+        </div>
+        <div id="pending-list"></div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            Auto-Executed <span class="badge" id="executed-count">0</span>
+        </div>
+        <div id="executed-list"></div>
+    </div>
+
+    <script>
+        async function loadData() {
+            const pending = await fetch('/api/pending').then(r => r.json());
+            const executed = await fetch('/api/executed').then(r => r.json());
+
+            document.getElementById('pending-count').textContent = pending.length;
+            document.getElementById('executed-count').textContent = executed.length;
+
+            const pendingList = document.getElementById('pending-list');
+            pendingList.innerHTML = pending.length === 0
+                ? '<div class="empty">No pending approvals.</div>'
+                : pending.map(p => `
+                    <div class="card pending">
+                        <div class="conflict">${p.conflict}</div>
+                        <div class="resolution">${p.proposed_resolution}</div>
+                        <div class="status pending">Awaiting Approval</div>
+                    </div>
+                `).join('');
+
+            const executedList = document.getElementById('executed-list');
+            executedList.innerHTML = executed.length === 0
+                ? '<div class="empty">No auto-executed actions yet.</div>'
+                : executed.map(e => `
+                    <div class="card executed">
+                        <div class="conflict">${e.conflict}</div>
+                        <div class="resolution">${e.resolution}</div>
+                        <div class="status executed">Auto-Executed</div>
+                    </div>
+                `).join('');
+        }
+
+        loadData();
+        setInterval(loadData, 5000);
+    </script>
+</body>
+</html>

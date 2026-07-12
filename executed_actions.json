@@ -1,0 +1,26 @@
+[
+  {
+    "conflict": "There is a meeting 'Solo late task' scheduled at 08:30 PM, outside normal working hours.",
+    "resolution": "Proposed resolutions for the calendar conflict:\n\n1. Reschedule the meeting to 09:30 AM (Monday).\n2. Reschedule the meeting to 07:00 PM (any day Tuesday - Friday)",
+    "status": "auto_executed",
+    "timestamp": "2026-07-12T12:42:36.763267"
+  },
+  {
+    "conflict": "There is a meeting 'Solo late task' scheduled at 08:30 PM, outside normal working hours.",
+    "resolution": "Here are 1-2 concrete resolutions for the calendar conflict:\n\n1. Reschedule 'Solo late task' meeting for 09:00 AM on the next available day, ensuring it takes place within normal working hours.\n2. Reschedule 'Solo late task' meeting for 10:00 AM on Monday, accommodating the 'no meetings before 9am' preference, albeit not ideal timing.",
+    "status": "auto_executed",
+    "timestamp": "2026-07-12T12:46:41.092383"
+  },
+  {
+    "conflict": "There is a meeting 'Solo late task' scheduled at 08:30 PM, outside normal working hours.",
+    "resolution": "Here are two possible resolutions for the conflict:\n\n1. Reschedule the 'Solo late task' meeting to the next day during normal working hours (e.g., 9:00 AM - 10:00 AM).\n2. Cancel or postpone the 'Solo late task' meeting, considering it as non-essential and scheduling it outside of normal working hours.",
+    "status": "auto_executed",
+    "timestamp": "2026-07-12T12:46:41.533119"
+  },
+  {
+    "conflict": "'Solo late task' overlaps with 'Solo late task' by 30 minutes.",
+    "resolution": "Here are the proposed resolutions for the calendar conflict:\n\n1. Reschedule the second instance of 'Solo late task' to start 1 hour after the first instance to maintain a buffer and adhere to the user's preference for a 15-minute buffer between back-to-back meetings.\n2. Move the first instance of 'Solo late task' by 30 minutes to minimize the overlap, then adjust subsequent tasks accordingly to maintain the user's preference for a buffer between back-to-back meetings.",
+    "status": "auto_executed",
+    "timestamp": "2026-07-12T12:46:42.054709"
+  }
+]

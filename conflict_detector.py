@@ -1,3 +1,4 @@
+from executed_actions import log_executed_action
 from calendar_auth import get_calendar_service
 from datetime import datetime, timedelta, timezone
 from dateutil import parser as dateparser
@@ -115,8 +116,9 @@ if __name__ == '__main__':
             print(f"\nRisk assessment: {describe_risk(risk)}")
 
             if risk == 'low':
-                print("[AUTO-EXECUTE] No other attendees — this would be applied automatically.")
-                print("(Note: actual calendar modification not yet implemented — this logs the decision only.)")
+                print("[AUTO-EXECUTE] No other attendees - this would be applied automatically.")
+                print("(Note: actual calendar modification not yet implemented - this logs the decision only.)")
+                log_executed_action(enriched['description'], resolution)
             else:
                 add_pending_action(enriched['description'], resolution)
 

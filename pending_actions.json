@@ -1,0 +1,22 @@
+[
+  {
+    "conflict": "There is a meeting 'Lenin (UA16+)' scheduled at 06:00 PM, outside normal working hours.",
+    "proposed_resolution": "Here are the proposed resolutions to the conflict:\n\n1. Change the meeting time to 08:00 PM (just within the user's preferred late schedule hours).\n2. Postpone the meeting to Tuesday at 06:00 PM (avoiding scheduling before 9am on Mondays, and allowing a meeting within 8pm schedule preference).",
+    "status": "awaiting_approval"
+  },
+  {
+    "conflict": "There is a meeting 'Vendor call late' scheduled at 09:00 PM, outside normal working hours.",
+    "proposed_resolution": "Here are the proposed resolutions:\n\n1. Reschedule the 'Vendor call late' meeting to the next available time slot (likely the day after), outside of working hours but after 8:00 PM.\n2. Move the 'Vendor call late' meeting to the next available time slot during working hours (within 9:00 AM to 8:00 PM) on a day other than Monday, considering the user's preference for no meetings before 9:00 AM on Mondays.",
+    "status": "awaiting_approval"
+  },
+  {
+    "conflict": "There is a meeting 'Client call late' scheduled at 09:00 PM, outside normal working hours.",
+    "proposed_resolution": "Here are the proposed resolutions for the calendar conflict:\n\n1. Reschedule the 'Client call late' meeting to 2:00 PM the next day.\n2. Reschedule the 'Client call late' meeting to a different time slot (e.g., 1:00 PM) on the same day.",
+    "status": "awaiting_approval"
+  },
+  {
+    "conflict": "'Solo late task' overlaps with 'Client call late' by 45 minutes.",
+    "proposed_resolution": "Here are 2 possible resolutions for the conflict:\n\n1. Move 'Solo late task' to an earlier time slot, allowing 'Client call late' to remain in the afternoon and maintain a 15-minute buffer between meetings.\n2. Schedule 'Client call late' earlier in the day and 'Solo late task' for the next afternoon, accommodating the user's preference for afternoon client calls.",
+    "status": "awaiting_approval"
+  }
+]
